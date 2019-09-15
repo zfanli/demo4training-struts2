@@ -6,15 +6,25 @@
 <struts>
 
   <constant name="struts.devMode" value="true"/>
+  <constant name="struts.action.excludePattern" value="/static/.*?" />
 
   <package name="demo4training" extends="struts-default">
-    <action name="index">
+    <action name="">
       <result>/index.html</result>
     </action>
   </package>
 
   <package name="api" namespace="/api" extends="json-default">
-    <action name="test" class="demo4training.actions.RateAction" method="execute">
+    <interceptors>
+      <interceptor-stack name="defaultStackWithTimerLog">
+        <interceptor-ref name="timer"></interceptor-ref>
+        <interceptor-ref name="logger"></interceptor-ref>
+        <interceptor-ref name="params"></interceptor-ref>
+        <interceptor-ref name="defaultStack"></interceptor-ref>
+      </interceptor-stack>
+    </interceptors>
+    <action name="rate" class="demo4training.actions.RateAction" method="execute">
+      <interceptor-ref name="defaultStackWithTimerLog"></interceptor-ref>
       <result name="json" type="json">
         <param name="root">result</param>
       </result>

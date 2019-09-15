@@ -12,6 +12,7 @@ public class RateAction extends ActionSupport {
 
 
     public String execute() {
+        prev = Math.random() * 0.5 - 0.25 + prev;
         result = new JSONObject(new Rate(prev)).toString();
         return "json";
     }
