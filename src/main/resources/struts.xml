@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+
+  <constant name="struts.devMode" value="true"/>
+
+  <package name="demo4training" extends="struts-default">
+    <action name="index">
+      <result>/index.html</result>
+    </action>
+  </package>
+
+  <package name="api" namespace="/api" extends="json-default">
+    <action name="test" class="demo4training.actions.RateAction" method="execute">
+      <result name="json" type="json">
+        <param name="root">result</param>
+      </result>
+    </action>
+  </package>
+
+</struts>
